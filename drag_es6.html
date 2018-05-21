@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    
+    body{
+      margin:0;
+      padding:0;
+    }
+    #div1
+    {
+      width:100px;
+      height:100px;
+      background-color:pink;
+      position:absolute;
+      
+    }
+
+    #div2{
+      width:100px;
+      height:100px;
+      background-color:yellow;
+      position:absolute;
+      
+    }
+  </style>
+</head>
+<body>
+   <div id="div2"></div>
+  <div id="div1"></div>
+
+ 
+  <script>
+    
+
+      
+
+    function Move(id){
+
+      // this.id=id; 
+      // this.el=document.getElementById(this.id);
+      
+      // this.disX=0;
+      // this.disY=0;
+
+      Object.assign(this,{
+        id,
+        el:document.getElementById(id),
+        disX:0,
+        disY:0,
+
+      });
+
+      this.mousedown();
+      
+      return this;
+    }
+
+    Object.assign(Move.prototype,{
+      mousedown(){
+        var _this=this;
+
+        this.el.onmousedown=function(e){
+          
+          _this.disX=e.clientX-_this.el.offsetLeft;
+          _this.disY=e.clientY-_this.el.offsetTop;
+          
+          _this.mousemove();
+          _this.mouseup();
+
+          return false;
+        }
+      },
+
+      mousemove(){
+        var _this=this;
+
+        document.onmousemove=function(e){
+         
+          _this.el.style.left=e.clientX-_this.disX+"px";
+          _this.el.style.top=e.clientY-_this.disY+"px";
+         
+
+        }
+      },
+
+      mouseup(){
+        document.onmouseup=function(){
+          document.onmousemove=document.onmouseup=null;
+          return false;
+        }
+      }
+
+    })
+
+    // Move.prototype.mousedown=function(){
+       
+    //   var _this=this;
+
+    //   this.el.onmousedown=function(e){
+        
+    //     _this.disX=e.clientX-_this.el.offsetLeft;
+    //     _this.disY=e.clientY-_this.el.offsetTop;
+        
+    //     _this.mousemove();
+    //     _this.mouseup();
+
+    //     return false;
+    //   }
+     
+    // }
+
+    
+
+    // Move.prototype.mousemove=function(){
+
+    //   var _this=this;
+
+    //   document.onmousemove=function(e){
+       
+    //     _this.el.style.left=e.clientX-_this.disX+"px";
+    //     _this.el.style.top=e.clientY-_this.disY+"px";
+       
+
+    //   }
+
+      
+    // }
+
+    // Move.prototype.mouseup=function(){
+    //   document.onmouseup=function(){
+    //     document.onmousemove=document.onmouseup=null;
+    //     return false;
+    //   }
+      
+    // }
+
+   
+
+
+    class MOVE{
+      // constructor(id){
+      //   this.id=id; 
+      //   this.el=document.getElementById(this.id);
+        
+      //   this.disX=0;
+      //   this.disY=0;
+
+      //   this.mousedown();
+        
+      //   return this;
+      // }
+
+      constructor(id){
+
+        Object.assign(this,{
+          id,
+          el:document.getElementById(id),
+          disX:0,
+          disY:0,
+
+        });
+        
+
+        this.mousedown();
+        
+        return this;
+      }
+
+      mousedown(){
+       
+        var _this=this;
+
+        this.el.onmousedown=function(e){
+          
+          _this.disX=e.clientX-_this.el.offsetLeft;
+          _this.disY=e.clientY-_this.el.offsetTop;
+          
+          _this.mousemove();
+          _this.mouseup();
+
+          return false;
+        }
+     
+      }
+
+      mousemove(){
+
+        var _this=this;
+
+        document.onmousemove=function(e){
+         
+          _this.el.style.left=e.clientX-_this.disX+"px";
+          _this.el.style.top=e.clientY-_this.disY+"px";
+         
+
+        }
+
+      
+      }
+
+      mouseup(){
+        document.onmouseup=function(){
+          document.onmousemove=document.onmouseup=null;
+          return false;
+        }
+        
+      }
+
+
+    }
+
+    new Move("div1");
+    new Move("div2");
+    // new MOVE("div1");
+    // new MOVE("div2");
+  </script>
+</body>
+</html>
